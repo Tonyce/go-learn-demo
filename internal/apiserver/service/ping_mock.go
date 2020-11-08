@@ -1,10 +1,10 @@
-// +build !mock
+// +build mock
 
 package service
 
+import "fmt"
+
 // PingPong ...
 func PingPong(v string) string {
-
-	// model
-	return "pong"
+	return fmt.Sprintf("pong mock %s", v)
 }

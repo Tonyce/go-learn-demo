@@ -1,16 +1,20 @@
 # go-learn-demo
 
-## debug
+## Debug
 
 [x] vs code
 
-## test
+## Test
 
-- integrated test
+![](./unit_test_tweet.png)
+
 - unit test
-  - mock
+  - [x] method mock `go test -tags mock`。 `+build mock / !mock` 见 `user model`
+  - [https://deployeveryday.com/2019/10/08/golang-auth-mock.html](https://deployeveryday.com/2019/10/08/golang-auth-mock.html)
+- integrated test
+  - io mock
     - http mock [https://www.ru-rocker.com/2017/07/10/how-to-unit-test-and-mocking-a-function-in-go/](https://www.ru-rocker.com/2017/07/10/how-to-unit-test-and-mocking-a-function-in-go/)
-    - [x] method mock `go test -tags mock`。 `+build mock / !mock` 见 `user model`
     
-
 ## custom error
+
+## middleware

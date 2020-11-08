@@ -22,7 +22,7 @@ func TestPing(t *testing.T) {
 	getting(c)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Equal(t, "pong", w.Body.String())
+	assert.Equal(t, "pong mock v", w.Body.String())
 
 	// if w.Code != 200 {
 	// 	b, _ := ioutil.ReadAll(w.Body)
