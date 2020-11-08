@@ -12,8 +12,7 @@ func V1Router(router *gin.Engine) {
 
 	{
 		v1.GET("/login", loginEndpoint)
-		// v1.POST("/submit", submitEndpoint)
-		// v1.POST("/read", readEndpoint)
+		UserV1Router(v1)
 	}
 }
 

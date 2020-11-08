@@ -13,19 +13,14 @@ func init() {
 	// common.InitMongoDB()
 }
 
-func TestPing(t *testing.T) {
+func TestUserV1(t *testing.T) {
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)
+	c.Params = []gin.Param{{Key: "k", Value: "test"}}
 
-	c.Params = []gin.Param{{Key: "k", Value: "v"}}
-
-	getting(c)
+	getUserEndpoint(c)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Equal(t, "pong", w.Body.String())
-
-	// if w.Code != 200 {
-	// 	b, _ := ioutil.ReadAll(w.Body)
-	// 	t.Error(w.Code, string(b))
-	// }
+	// assert.Equal(t, `{"name":"test"}`, w.Body.String())
+	assert.Equal(t, `{"name":"1"}`, w.Body.String())
 }
