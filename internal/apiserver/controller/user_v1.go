@@ -10,6 +10,7 @@ import (
 // UserV1Router ...
 func UserV1Router(router *gin.RouterGroup) {
 	router.GET("/user", getUserEndpoint)
+	router.GET("/user/http", getUserHTTPEndpoint)
 }
 
 func getUserEndpoint(c *gin.Context) {
@@ -24,4 +25,9 @@ func getUserEndpoint(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"name": user.Name,
 	})
+}
+
+func getUserHTTPEndpoint(c *gin.Context) {
+	result := service.GetUserFromHTTP()
+	c.String(http.StatusOK, result)
 }
