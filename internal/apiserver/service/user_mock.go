@@ -14,3 +14,8 @@ func GetUser(v string) (*model.User, error) {
 		Name: v,
 	}, nil
 }
+
+// GetUserFromHTTP ...
+func GetUserFromHTTP() string {
+	return "GetUserFromHTTP"
+}
