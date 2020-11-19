@@ -26,3 +26,17 @@ func TestV1Route(t *testing.T) {
 
 	assert.Equal(t, 200, w.Code)
 }
+
+func TestUserV1Route(t *testing.T) {
+	router := apiserver.SetupRouter()
+
+	w := httptest.NewRecorder()
+
+	req, _ := http.NewRequest("GET", "/v1/user", nil)
+	req.Header.Set("User-Agent", "http-test")
+
+	router.ServeHTTP(w, req)
+
+	assert.Equal(t, 200, w.Code)
+	assert.Equal(t, `{"name":"test"}`, w.Body.String())
+}
