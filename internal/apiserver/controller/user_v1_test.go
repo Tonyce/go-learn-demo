@@ -22,7 +22,7 @@ func TestUserV1(t *testing.T) {
 
 	assert.Equal(t, 200, w.Code)
 	// assert.Equal(t, `{"name":"test"}`, w.Body.String())
-	assert.Equal(t, `{"name":"1"}`, w.Body.String())
+	assert.Equal(t, `{"name":"test"}`, w.Body.String())
 }
 
 func TestUserHTTP(t *testing.T) {

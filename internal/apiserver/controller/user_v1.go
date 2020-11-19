@@ -2,6 +2,7 @@ package controller
 
 import (
 	"logical-example/internal/apiserver/service"
+	"logical-example/internal/model"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,9 +14,10 @@ func UserV1Router(router *gin.RouterGroup) {
 	router.GET("/user/http", getUserHTTPEndpoint)
 }
 
+// TODO context 设置 serviceInstance Repository
 func getUserEndpoint(c *gin.Context) {
 
-	user, err := service.GetUser("1")
+	user, err := service.UserServiceInstance.GetUser("1", model.MongoUserRepository)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -28,6 +30,6 @@ func getUserEndpoint(c *gin.Context) {
 }
 
 func getUserHTTPEndpoint(c *gin.Context) {
-	result := service.GetUserFromHTTP()
+	result := service.UserServiceInstance.GetUserFromHTTP()
 	c.String(http.StatusOK, result)
 }
