@@ -1,10 +1,13 @@
 package testapiserver
 
 import (
+	"fmt"
 	"logical-example/internal/apiserver"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
+	"time"
 
 	"github.com/go-playground/assert/v2"
 )
@@ -12,6 +15,23 @@ import (
 func init() {
 	// gin.SetMode(gin.TestMode)
 
+}
+
+func beforeAll() {
+	t := time.Now()
+	fmt.Println("before ", t.Format(time.RFC3339))
+}
+
+func afterAll() {
+	fmt.Println("after ", time.Now())
+}
+
+func TestMain(m *testing.M) {
+	beforeAll()
+	code := m.Run()
+	// shutdown()
+	afterAll()
+	os.Exit(code)
 }
 
 func TestV1Route(t *testing.T) {
