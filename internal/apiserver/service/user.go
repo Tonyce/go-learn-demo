@@ -1,5 +1,3 @@
-// +build !mock
-
 package service
 
 import (
@@ -10,10 +8,26 @@ import (
 	"time"
 )
 
-// GetUser ...
-func GetUser(v string) (*model.User, error) {
+// UserService ...
+type UserService interface {
+	GetUser(v string, repo model.UserRepository) (*model.User, error)
+	GetUserFromHTTP() string
+}
 
-	user, err := model.MongoUserRepository.FindOne(1)
+// User ...
+type User struct{}
+
+// UserServiceInstance ...
+var UserServiceInstance UserService
+
+func init() {
+	UserServiceInstance = &User{}
+}
+
+// GetUser ...
+func (u *User) GetUser(v string, repo model.UserRepository) (*model.User, error) {
+
+	user, err := repo.FindOne(1)
 	if err != nil {
 		// log.Fatal(err)
 		return nil, err
@@ -22,7 +36,7 @@ func GetUser(v string) (*model.User, error) {
 }
 
 // GetUserFromHTTP ...
-func GetUserFromHTTP() string {
+func (u *User) GetUserFromHTTP() string {
 	var netClient = &http.Client{
 		Timeout: time.Second * 10,
 	}
