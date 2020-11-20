@@ -7,6 +7,7 @@ package service
 import (
 	gomock "github.com/golang/mock/gomock"
 	model "logical-example/internal/model"
+	repository "logical-example/internal/repository"
 	reflect "reflect"
 )
 
@@ -34,7 +35,7 @@ func (m *MockUserService) EXPECT() *MockUserServiceMockRecorder {
 }
 
 // GetUser mocks base method
-func (m *MockUserService) GetUser(v string, repo model.UserRepository) (*model.User, error) {
+func (m *MockUserService) GetUser(v string, repo repository.UserRepository) (*model.User, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUser", v, repo)
 	ret0, _ := ret[0].(*model.User)

@@ -1,0 +1,48 @@
+package repository
+
+import (
+	"context"
+	"fmt"
+	"logical-example/internal/common"
+	"logical-example/internal/model"
+	"time"
+
+	"go.mongodb.org/mongo-driver/mongo"
+	"gopkg.in/mgo.v2/bson"
+)
+
+// UserRepository 用户仓库
+type UserRepository interface {
+	// 根据用户id查询得到一个用户或是错误信息
+	FindOne(id int) (*model.User, error)
+}
+
+type mongoUserRepository struct {
+	collection *mongo.Collection
+}
+
+// MongoUserRepository ...
+var MongoUserRepository UserRepository
+
+func init() {
+	fmt.Println("user reposity init")
+	mongoClient := common.GetMongoClient()
+	db := mongoClient.Database("test")
+	collection := db.Collection("user")
+	MongoUserRepository = &mongoUserRepository{
+		collection: collection,
+	}
+}
+
+// FindOne ...
+func (repo *mongoUserRepository) FindOne(id int) (*model.User, error) {
+	var user model.User
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	result := repo.collection.FindOne(ctx, bson.M{})
+	err := result.Decode(&user)
+
+	return &user, err
+}

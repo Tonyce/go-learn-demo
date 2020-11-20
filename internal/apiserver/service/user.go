@@ -4,13 +4,14 @@ import (
 	"io/ioutil"
 	"log"
 	"logical-example/internal/model"
+	"logical-example/internal/repository"
 	"net/http"
 	"time"
 )
 
 // UserService ...
 type UserService interface {
-	GetUser(v string, repo model.UserRepository) (*model.User, error)
+	GetUser(v string, repo repository.UserRepository) (*model.User, error)
 	GetUserFromHTTP() string
 }
 
@@ -25,7 +26,7 @@ func init() {
 }
 
 // GetUser ...
-func (u *User) GetUser(v string, repo model.UserRepository) (*model.User, error) {
+func (u *User) GetUser(v string, repo repository.UserRepository) (*model.User, error) {
 
 	user, err := repo.FindOne(1)
 	if err != nil {

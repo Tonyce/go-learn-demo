@@ -2,7 +2,7 @@ package controller
 
 import (
 	"logical-example/internal/apiserver/service"
-	"logical-example/internal/model"
+	"logical-example/internal/repository"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,7 +26,7 @@ func getUserEndpoint(c *gin.Context) {
 
 	userServiceInstance := c.Value("UserInstance").(service.UserService)
 
-	user, err := userServiceInstance.GetUser("1", model.MongoUserRepository)
+	user, err := userServiceInstance.GetUser("1", repository.UserRepo)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

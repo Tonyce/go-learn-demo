@@ -3,6 +3,7 @@ package controller
 import (
 	"logical-example/internal/apiserver/service"
 	"logical-example/internal/model"
+	"logical-example/internal/repository"
 	"net/http/httptest"
 	"testing"
 
@@ -25,7 +26,7 @@ func TestUserV1(t *testing.T) {
 	// userMockRepo := model.NewMockUserRepository(ctrl)
 
 	// userMockRepo.EXPECT().FindOne(1).Return(&model.User{Name: "张三李四"}, nil)
-	userMockServiceInstance.EXPECT().GetUser("1", model.MongoUserRepository).Return(&model.User{Name: "张三李四"}, nil)
+	userMockServiceInstance.EXPECT().GetUser("1", repository.UserRepo).Return(&model.User{Name: "张三李四"}, nil)
 
 	w := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(w)

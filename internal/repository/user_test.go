@@ -1,8 +1,9 @@
-package model
+package repository
 
 import (
 	"errors"
 	"log"
+	"logical-example/internal/model"
 	"testing"
 
 	gomock "github.com/golang/mock/gomock"
@@ -15,9 +16,9 @@ func TestReturn(t *testing.T) {
 
 	repo := NewMockUserRepository(ctrl)
 	// 期望FindOne(1)返回张三用户
-	repo.EXPECT().FindOne(1).Return(&User{Name: "张三"}, nil)
+	repo.EXPECT().FindOne(1).Return(&model.User{Name: "张三"}, nil)
 	// 期望FindOne(2)返回李四用户
-	repo.EXPECT().FindOne(2).Return(&User{Name: "李四"}, nil)
+	repo.EXPECT().FindOne(2).Return(&model.User{Name: "李四"}, nil)
 	// 期望给FindOne(3)返回找不到用户的错误
 	repo.EXPECT().FindOne(3).Return(nil, errors.New("user not found"))
 	// 验证一下结果
@@ -33,16 +34,16 @@ func TestReturnDynamic(t *testing.T) {
 	defer ctrl.Finish()
 	repo := NewMockUserRepository(ctrl)
 	// 常用方法之一：DoAndReturn()，动态设置返回值
-	repo.EXPECT().FindOne(gomock.Any()).DoAndReturn(func(i int) (*User, error) {
+	repo.EXPECT().FindOne(gomock.Any()).DoAndReturn(func(i int) (*model.User, error) {
 		if i == 0 {
 			return nil, errors.New("user not found")
 		}
 		if i < 100 {
-			return &User{
+			return &model.User{
 				Name: "小于100",
 			}, nil
 		}
-		return &User{
+		return &model.User{
 			Name: "大于等于100",
 		}, nil
 	})
@@ -57,9 +58,9 @@ func TestTimes(t *testing.T) {
 
 	repo := NewMockUserRepository(ctrl)
 	// 默认期望调用一次
-	repo.EXPECT().FindOne(1).Return(&User{Name: "张三"}, nil)
+	repo.EXPECT().FindOne(1).Return(&model.User{Name: "张三"}, nil)
 	// 期望调用2次
-	repo.EXPECT().FindOne(2).Return(&User{Name: "李四"}, nil).Times(2)
+	repo.EXPECT().FindOne(2).Return(&model.User{Name: "李四"}, nil).Times(2)
 	// 调用多少次可以,包括0次
 	repo.EXPECT().FindOne(3).Return(nil, errors.New("user not found")).AnyTimes()
 
