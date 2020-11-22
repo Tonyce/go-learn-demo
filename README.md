@@ -29,3 +29,10 @@
 
 ## logger
 
+## other
+
+  - [https://talks.golang.org/2012/10things.slide#12](https://talks.golang.org/2012/10things.slide#12)
+
+  - embed
+    - [https://travix.io/type-embedding-in-go-ba40dd4264df](https://travix.io/type-embedding-in-go-ba40dd4264df)
+    - [https://eli.thegreenplace.net/2020/embedding-in-go-part-1-structs-in-structs/](https://eli.thegreenplace.net/2020/embedding-in-go-part-1-structs-in-structs/)
