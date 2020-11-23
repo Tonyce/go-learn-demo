@@ -3,7 +3,6 @@ package apiserver
 import (
 	"log"
 	"logical-example/internal/apiserver/controller"
-	"logical-example/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +17,7 @@ func init() {
 func SetupRouter() *gin.Engine {
 	// r := gin.Default()
 	r := gin.New()
-	r.Use(middleware.Logger())
+	// r.Use(middleware.Logger())
 	// r.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 	// 	// 	// your custom format
 	// 	return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
