@@ -21,6 +21,14 @@ option go_package = "logical-example/internal/pb";
 
 package pb;
 
+enum TYPE {
+  DEFAULT = 0;
+  LEFT = 1;
+  DOWN = 2;
+  RIGHT = 3;
+  UP = 4;
+}
+
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
