@@ -39,3 +39,15 @@
   
 ## git hook
   - [https://medium.com/@radlinskii/writing-the-pre-commit-git-hook-for-go-files-810f8d5f1c6f](https://medium.com/@radlinskii/writing-the-pre-commit-git-hook-for-go-files-810f8d5f1c6f)
+
+## grpc
+
+```shell
+$ protoc --go_out=. --go_opt=paths=source_relative \
+    --go-grpc_out=. --go-grpc_opt=paths=source_relative \
+    proto/helloworld.proto
+```
+```shell
+😒  ~/17zuoye/go-examples/logical-example/proto > protoc --go_out=paths=source_relative:../internal/pb helloworld.proto
+😒  ~/17zuoye/go-examples/logical-example/proto > protoc --go-grpc_out=paths=source_relative:../internal/pb helloworld.proto
+ ```

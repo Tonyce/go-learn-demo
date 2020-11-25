@@ -26,9 +26,9 @@ func (base Base) DescribeTag() string {
 }
 
 // DescribeTag ...
-func (co Container) DescribeTag() string {
-	return fmt.Sprintf("tag is %s", co.tag)
-}
+// func (co Container) DescribeTag() string {
+// 	return fmt.Sprintf("tag is %s", co.tag)
+// }
 
 // Fooer ...
 type Fooer interface {
