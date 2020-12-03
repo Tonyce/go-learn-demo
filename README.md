@@ -51,3 +51,7 @@ $ protoc --go_out=. --go_opt=paths=source_relative \
 😒  ~/17zuoye/go-examples/logical-example/proto > protoc --go_out=paths=source_relative:../internal/pb helloworld.proto
 😒  ~/17zuoye/go-examples/logical-example/proto > protoc --go-grpc_out=paths=source_relative:../internal/pb helloworld.proto
  ```
+
+## gops
+
+[https://mp.weixin.qq.com/s/iS7R0NTZcTlonUw8bq0jKQ](https://mp.weixin.qq.com/s/iS7R0NTZcTlonUw8bq0jKQ)
