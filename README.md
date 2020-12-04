@@ -69,3 +69,5 @@ $ go run cmd/cmdargs/main.go -v=true -X=PSOT
 ```
 
 ## config
+
+**viper**
