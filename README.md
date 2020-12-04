@@ -30,6 +30,8 @@
 
 ## logger
 
+**logrus**
+
 ## other
 
 - [https://talks.golang.org/2012/10things.slide#12](https://talks.golang.org/2012/10things.slide#12)
@@ -63,3 +65,20 @@ $ protoc --go_out=. --go_opt=paths=source_relative \
 $ CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build
 ...
 ```
+## gops
+
+[https://mp.weixin.qq.com/s/iS7R0NTZcTlonUw8bq0jKQ](https://mp.weixin.qq.com/s/iS7R0NTZcTlonUw8bq0jKQ)
+
+## 命令行参数读取
+
+cmdargs
+
+**flag**
+
+```bash
+$ go run cmd/cmdargs/main.go -v=true -X=PSOT
+```
+
+## config
+
+**viper**
