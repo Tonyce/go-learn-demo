@@ -32,7 +32,7 @@ import (
 )
 
 const (
-	address     = "nuc.local:50051"
+	address     = "localhost:5055"
 	defaultName = "world"
 )
 
