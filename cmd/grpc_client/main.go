@@ -21,6 +21,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"logical-example/internal/pb"
 	"os"
@@ -29,6 +30,7 @@ import (
 	// pb "logical-example/internal/helloworld"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/connectivity"
 )
 
 const (
@@ -38,11 +40,49 @@ const (
 
 func main() {
 	// Set up a connection to the server.
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}
-	defer conn.Close()
+	// defer conn.Close()
+	go func() {
+		count := 0
+		state := conn.GetState()
+		for {
+			v := conn.WaitForStateChange(context.Background(), state)
+			state = conn.GetState()
+			if count > 5 {
+				conn.Close()
+				fmt.Println("close")
+				break
+			}
+			fmt.Println("--------------", v)
+
+			switch state {
+			case connectivity.Connecting:
+				{
+					fmt.Println("connneting")
+					count++
+				}
+			case connectivity.Ready:
+				{
+
+					fmt.Println("Ready")
+					count = 0
+				}
+			case connectivity.Shutdown:
+				{
+					fmt.Println("Shutdown")
+				}
+			case connectivity.TransientFailure:
+				{
+					fmt.Println("TransientFailure")
+				}
+			}
+		}
+	}()
+
 	c := pb.NewGreeterClient(conn)
 
 	// Contact the server and print out its response.
@@ -50,11 +90,13 @@ func main() {
 	if len(os.Args) > 1 {
 		name = os.Args[1]
 	}
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+	// ctx, cancel := context.WithTimeout(ctx, time.Second)
 	defer cancel()
 	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
+		time.Sleep(60 * time.Minute)
 	}
 	log.Printf("Greeting: %s", r.GetMessage())
+	time.Sleep(60 * time.Minute)
 }
